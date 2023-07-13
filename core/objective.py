@@ -5,18 +5,28 @@ from resources.constants.constants import (
     daysInTheYear,
 )
 
+months = list(range(12))
+
 
 def obj_rule_plants(model):
-    return sum((0 * plant.valor) for plant in plants)
+    return sum(
+        (
+            model.quantidade_colher[month, plants.index(plant)]
+            * plant.estação_da_colheita[month]
+        )
+        - (plant.produção_da_casa * plant.estação_da_colheita[month]) * plant.valor
+        for month in months
+        for plant in plants
+    )
 
 
-def obj_rule_animals():
+def obj_rule_animals(model):
     return sum(
         (
             (
                 (
-                    (animal.numero_de_femeas * animal.tempo_de_producao * daysInTheYear)
-                    - animal.producao_da_casa
+                    (animal.numero_de_femeas * animal.tempo_de_produção * daysInTheYear)
+                    - animal.produção_da_casa
                 )
                 * animal.valor
             )
@@ -30,4 +40,4 @@ def obj_rule_animals():
 
 
 def obj_rule(model):
-    return obj_rule_animals()
+    return obj_rule_animals(model) + obj_rule_plants(model)

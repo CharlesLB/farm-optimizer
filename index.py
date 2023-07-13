@@ -1,25 +1,26 @@
 from pyomo.environ import *
+from core.objective import obj_rule
+from core.constraints import plant_rule_produção, plant_rule_plantar_o_que_colho
 from resources.constants.constants import (
     monthsInTheYear,
 )
-from core.objective import obj_rule
 from resources.plants._all import plants
 
 
 def print_quantidade_colher_plantar(model):
     for month in months:
-        print("month=", month, "\n")
+        print("\nmonth:", month)
         for plant in plants:
             index: int = plants.index(plant)
 
-            print(
-                "plant=",
-                plant.nome,
-                "must plant=",
-                value(model.quantidade_plantar[month, index]),
-                "and must harvest=",
-                value(model.quantidade_colher[month, index]),
-            )
+            if model.quantidade_plantar[month, index].value:
+                print(
+                    plant.nome,
+                    ": must plant=",
+                    value(model.quantidade_plantar[month, index].value),
+                    "and must harvest=",
+                    value(model.quantidade_colher[month, index].value),
+                )
 
 
 model = ConcreteModel()
@@ -35,6 +36,15 @@ model.obj = Objective(
     rule=obj_rule,
 )
 
+model.constraints = ConstraintList()
+
+for month in months:
+    for plant in plants:
+        model.constraints.add(plant_rule_produção(model, month, plant))
+        model.constraints.add(plant_rule_plantar_o_que_colho(model, month, plant))
+
+solver = SolverFactory("glpk")
+results = solver.solve(model)
 
 print("obj=", value(model.obj))
 print_quantidade_colher_plantar(model)
