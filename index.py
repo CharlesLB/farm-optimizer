@@ -38,9 +38,7 @@ months = list(range(monthsInTheYear))
 model.quantidade_plantar = Var(plantas, months, domain=NonNegativeIntegers)
 model.quantidade_colher = Var(plantas, months, domain=NonNegativeReals)
 
-model.obj = Objective(
-    rule=obj_rule,
-)
+model.obj = Objective(rule=obj_rule, sense=maximize)
 
 model.constraints = ConstraintList()
 

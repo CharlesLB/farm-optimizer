@@ -41,4 +41,4 @@ def obj_rule_animals(model):
 
 
 def obj_rule(model):
-    return obj_rule_animals(model)
+    return obj_rule_animals(model) + obj_rule_plants(model)
