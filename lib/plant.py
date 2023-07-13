@@ -1,18 +1,21 @@
+import string
+
+
 class Plant:
     def __init__(
         self,
-        nome,
-        producao_da_casa,
-        valor,
-        estacao_da_colheita,
-        tempo_de_frutificação,
-        tempo_de_colheita,
-        tempo_de_plantio,
-        tempo_de_venda,
-        custo_de_muda,
-        producao_por_muda,
-        remessa,
-        max,
+        nome: string,
+        producao_da_casa: float,
+        valor: float,
+        estacao_da_colheita: list[12],
+        tempo_de_frutificação: int,
+        tempo_de_colheita: float,
+        tempo_de_plantio: float,
+        tempo_de_venda: float,
+        custo_de_muda: float,
+        producao_por_muda: float,
+        remessa: float,
+        max: float,
     ):
         self.nome = nome
         self.producao_da_casa = producao_da_casa  # float(int/mês)

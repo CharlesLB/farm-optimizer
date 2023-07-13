@@ -1,6 +1,7 @@
 daysInTheMonth = 30
 workDaysInTheMonth = 22
-limitador_de_ciclos_anos = 10
+monthsInTheYear = 12
+daysInTheYear = daysInTheMonth * monthsInTheYear
 horas_de_manutencao_por_mes = 40
 horas_de_trabalho_por_dia = 6
 horas_de_trabalho_por_mes = horas_de_trabalho_por_dia * workDaysInTheMonth
