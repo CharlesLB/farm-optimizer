@@ -2,9 +2,11 @@ from pyomo.environ import *
 from resources.plants._all import plants
 from resources.animals._all import animals
 from utils.month import getPlantMonth
+from utils.math import getIntValue
 from resources.constants.constants import (
-    daysInTheMonth,
+    daysInMonth,
     horas_de_trabalho_por_mes,
+    monthsInYear,
 )
 
 
@@ -13,13 +15,15 @@ from resources.constants.constants import (
 months = list(range(12))
 
 
-def rule_trabalhar_mais_que_o_planejado(model):
+def rule_trabalhar_mais_que_o_planejado_mes(model, month):
     return (
         (
             sum(
-                animal.tempo_de_cuidado * animal.numero_de_femeas * daysInTheMonth
-                + (animal.numero_de_femeas * animal.tempo_de_produção * daysInTheMonth)
-                / animal.remessa
+                getIntValue(
+                    animal.tempo_de_cuidado * animal.numero_de_femeas * daysInMonth
+                    + (animal.numero_de_femeas * animal.tempo_de_produção * daysInMonth)
+                    / animal.remessa
+                )
                 * animal.tempo_de_venda
                 for animal in animals
             )
@@ -43,7 +47,6 @@ def rule_trabalhar_mais_que_o_planejado(model):
                     * plant.tempo_de_venda
                 )
                 for plant in plants
-                for month in months
             )
         )
     ) <= horas_de_trabalho_por_mes
@@ -69,22 +72,9 @@ def plant_rule_plantar_o_que_colho(model, month, plant):
     )
 
 
-# model.animal_constraints = ConstraintList()
-
-# for animal in animals:
-#     model.animal_constraints.add(animal_rule_produção(model, animal))
-#     model.animal_constraints.add(
-#         animal_rule_trabalhar_mais_que_o_planejado(model, animal)
-#     )
-
-
-# def general_rule_trabalhar_mais_que_o_planejado(model):
-#     return (
-#         model.total_trabalhado_mes_animal
-#         <= horas_de_trabalho_por_mes - horas_de_manutencao_por_mes
-#     )
-
-
-# model.general_constraint = Constraint(
-#     rule=general_rule_trabalhar_mais_que_o_planejado,
-# )
+def plant_rule_max(model, plant):
+    months = list(range(monthsInYear))
+    return (
+        sum(model.quantidade_plantar[plants.index(plant), month] for month in months)
+        <= plant.max
+    )

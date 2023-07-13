@@ -1,10 +1,10 @@
-daysInTheMonth = 30
-workDaysInTheMonth = 22
-monthsInTheYear = 12
-daysInTheYear = daysInTheMonth * monthsInTheYear
+daysInMonth = 30
+workdaysInMonth = 22
+monthsInYear = 12
+daysInTheYear = daysInMonth * monthsInYear
 horas_de_manutencao_por_mes = 40
 horas_de_trabalho_por_dia = 6
-horas_de_trabalho_por_mes = horas_de_trabalho_por_dia * workDaysInTheMonth
+horas_de_trabalho_por_mes = horas_de_trabalho_por_dia * workdaysInMonth
 
 preco_racao_aves = 78.3
 numero_de_sacos_por_mes = 3

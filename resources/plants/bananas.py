@@ -1,4 +1,5 @@
 from lib.plant import Plant
+from resources.constants.constants import tempo_de_venda_planta
 
 bananas = Plant(
     "bananas",
@@ -8,9 +9,9 @@ bananas = Plant(
     15,
     0.02,
     0.4,
-    2,
+    tempo_de_venda_planta,
     10,
     20,
     25,
-    200,
+    20,
 )
