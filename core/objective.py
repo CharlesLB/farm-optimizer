@@ -9,12 +9,15 @@ months = list(range(12))
 def obj_rule_plants(model):
     return sum(
         (
-            model.quantidade_colher[month, plants.index(plant)]
-            * plant.estação_da_colheita[month]
+            (
+                model.quantidade_colher[plants.index(plant), month]
+                * plant.estação_da_colheita[month]
+            )
+            - (plant.produção_da_casa * plant.estação_da_colheita[month])
         )
-        - (plant.produção_da_casa * plant.estação_da_colheita[month]) * plant.valor
-        for month in months
+        * plant.valor
         for plant in plants
+        for month in months
     )
 
 
