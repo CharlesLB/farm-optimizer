@@ -42,7 +42,7 @@ for i in fabricas:
     model.oferta.add(oferta_rule(model, i))
 
 solver = SolverFactory("glpk")
-results = solver.solve(model, tee=True)
+results = solver.solve(model)
 
 cost = model.obj.expr()
 print("cost=", cost)

@@ -1,9 +1,7 @@
 from pyomo.environ import *
 from resources.plants._all import plants
 from resources.animals._all import animals
-from resources.constants.constants import (
-    daysInTheYear,
-)
+from resources.constants.constants import daysInTheYear, monthsInTheYear
 
 months = list(range(12))
 
@@ -26,7 +24,7 @@ def obj_rule_animals(model):
             (
                 (
                     (animal.numero_de_femeas * animal.tempo_de_produção * daysInTheYear)
-                    - animal.produção_da_casa
+                    - animal.produção_da_casa * monthsInTheYear
                 )
                 * animal.valor
             )
@@ -40,4 +38,4 @@ def obj_rule_animals(model):
 
 
 def obj_rule(model):
-    return obj_rule_animals(model) + obj_rule_plants(model)
+    return obj_rule_animals(model)
