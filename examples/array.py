@@ -1,62 +1,39 @@
-# Problema da Mochila - Knapsack Problem
-import pyomo.environ as pyEnv
+from pyomo.environ import *
 
-path = "/home/tito/cplex/bin/x86-64_linux/cplex"
+model = ConcreteModel()
 
-##-------------------------LEITURA DA INSTANCIA------------------------------------##
+n_fabricas = 3
+n_clientes = 4
 
-filePesoMaximo = open("p08_c.txt")
-pesoMaximo = filePesoMaximo.readline().split("\n")[0]
-pesoMaximo = int(pesoMaximo)
+fabricas = list(range(n_fabricas))
+clientes = list(range(n_clientes))
 
-filePesos = open("p08_w.txt")
-pesos = filePesos.readlines()
-pesos = pesos[0].split()
-pesos = [int(i) for i in pesos]
+ofertas = [75, 125, 100]
+demandas = [80, 65, 70, 85]
+custos = [[464, 513, 684, 857], [352, 416, 690, 791], [995, 682, 388, 685]]
 
+model.x = Var(fabricas, clientes, domain=NonNegativeIntegers)
 
-fileLucros = open("p08_p.txt")
-lucros = fileLucros.readlines()
-lucros = lucros[0].split()
-lucros = [int(i) for i in lucros]
-
-m = len(pesos)
-
-# -------------------------DECLARACAO DO MODELO E SEUS PARAMETROS--------------------##
-# Modelo
-modelo = pyEnv.ConcreteModel()
-# Indice para os pesos e precos
-modelo.I = pyEnv.RangeSet(m)
-
-# Variaveis de decisao xi
-modelo.x = pyEnv.Var(modelo.I, within=pyEnv.Binary)
-
-# Preco de cada produto
-modelo.c = pyEnv.Param(modelo.I, initialize=lambda modelo, i: lucros[i - 1])
-# Peso de cada produto
-modelo.p = pyEnv.Param(modelo.I, initialize=lambda modelo, i: pesos[i - 1])
-
-##-------------------------DECLARACAO DA FUNCAO OBJETIVO E RESTRICAO--------------------##
-# Funcao objetivo do problema
-modelo.objetivo = pyEnv.Objective(
-    expr=sum(modelo.c[i] * modelo.x[i] for i in modelo.I), sense=pyEnv.maximize
+model.obj = Objective(
+    expr=sum(custos[i][j] * model.x[i, j] for i in fabricas for j in clientes)
 )
 
-# Restricao do problema
-modelo.restricao = pyEnv.Constraint(
-    expr=sum(modelo.p[i] * modelo.x[i] for i in modelo.I) <= pesoMaximo
-)
+model.demanda = ConstraintList()
+for j in clientes:
+    model.demanda.add(sum(model.x[i, j] for i in fabricas) == demandas[j])
 
+model.oferta = ConstraintList()
+for i in fabricas:
+    model.oferta.add(sum(model.x[i, j] for j in clientes) <= ofertas[i])
 
-##-------------------------------RESOLUCAO DO MODELO-----------------------------------##
-solver = pyEnv.SolverFactory("cplex", executable=path)
-resultado = solver.solve(modelo, tee=True)
-print("\n-------------------------\n")
-modelo.pprint()
-modelo.objetivo()
-print(resultado)
+solver = SolverFactory("glpk")
+results = solver.solve(model, tee=True)
 
-##-------------------------PRINT DAS VARIAVEIS DE DECISAO--------------------##
-lista = list(modelo.x.keys())
-for i in lista:
-    print(i, "--", modelo.x[i]())
+cost = model.obj.expr()
+print("cost=", cost)
+
+for i in fabricas:
+    for j in clientes:
+        x_value = model.x[i, j].value
+        if x_value != 0:
+            print("Fábrica %s vende para cliente %s %s unidades" % (i, j, x_value))
