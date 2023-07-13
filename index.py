@@ -8,15 +8,17 @@ from resources.plants._all import plants
 
 def print_quantidade_colher_plantar(model):
     for month in months:
-        print("month=", month)
+        print("month=", month, "\n")
         for plant in plants:
+            index: int = plants.index(plant)
+
             print(
                 "plant=",
                 plant.nome,
                 "must plant=",
-                value(model.quantidade_plantar[month, plants.index(plant)]),
+                value(model.quantidade_plantar[month, index]),
                 "and must harvest=",
-                value(model.quantidade_colher[month, plants.index(plant)]),
+                value(model.quantidade_colher[month, index]),
             )
 
 
