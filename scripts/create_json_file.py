@@ -28,16 +28,6 @@ for plant in plants:
     }
     plants_array.append(new_plant)
 
-    # nome,
-    #     producao_da_casa: float,
-    #     valor: float,
-    #     tempo_de_cuidado: float,
-    #     custo_por_animal: float,
-    #     tempo_de_venda: float,
-    #     tempo_de_producao: float,
-    #     remessa: float,
-    #     numero_de_femeas: int,
-    #     numero_de_machos: int,
 
 animals_array = []
 

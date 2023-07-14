@@ -24,13 +24,10 @@ input_file = arguments[1]
 with open(input_file, "r") as file:
     json_data = json.load(file)
 
-print(json_data["plants"][0]["nome"])
-
 plants_array = json_data["plants"]
 plants = []
 
 for plant in plants_array:
-    print(plant)
     new_plant = Plant(
         plant["nome"],
         plant["producao_da_casa"],

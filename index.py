@@ -9,29 +9,11 @@ from core.constraints import (
     rule_trabalhar_mais_que_o_planejado_mes,
     plant_rule_max,
 )
+from core.writer import write_output
 from resources.constants.constants import (
     monthsInYear,
 )
 from resources.data import plants
-
-
-def print_quantidade_colher_plantar(model):
-    for month in months:
-        print("\nmonth:", month + 1)
-        for plant in plants:
-            index: int = plants.index(plant)
-
-            if (
-                model.quantidade_plantar[index, month].value
-                or model.quantidade_colher[index, month].value
-            ):
-                print(
-                    plant.nome,
-                    ": must plant=",
-                    value(model.quantidade_plantar[index, month].value),
-                    "and must harvest=",
-                    value(model.quantidade_colher[index, month].value),
-                )
 
 
 arguments = sys.argv
@@ -67,5 +49,4 @@ for month in months:
 solver = SolverFactory("glpk")
 results = solver.solve(model)
 
-print("obj=", value(model.obj))
-print_quantidade_colher_plantar(model)
+write_output(model)

@@ -1,8 +1,8 @@
 from pyomo.environ import *
 from resources.data import plants
-from resources.data import animals
-from utils.month import getPlantMonth
-from utils.math import getIntValue
+from resources.animals._all import animals
+from utils.date import get_plant_month
+from utils.math import get_int_value
 from resources.constants.constants import (
     daysInMonth,
     horas_de_trabalho_por_mes,
@@ -19,7 +19,7 @@ def rule_trabalhar_mais_que_o_planejado_mes(model, month):
     return (
         (
             sum(
-                getIntValue(
+                get_int_value(
                     animal.tempo_de_cuidado * animal.numero_de_femeas * daysInMonth
                     + (animal.numero_de_femeas * animal.tempo_de_producao * daysInMonth)
                     / animal.remessa
@@ -66,7 +66,7 @@ def plant_rule_plantar_o_que_colho(model, month, plant):
     return (
         model.quantidade_colher[plants.index(plant), month]
         <= model.quantidade_plantar[
-            plants.index(plant), getPlantMonth(month, plant.tempo_de_frutificacao)
+            plants.index(plant), get_plant_month(month, plant.tempo_de_frutificacao)
         ]
         * plant.producao_por_muda
     )
