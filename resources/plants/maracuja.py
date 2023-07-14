@@ -6,7 +6,7 @@ maracujá = Plant(
     10,  # producao da casa
     4,  # valor
     [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],  # estacao da colheita
-    8,  # tempo de frutificacao
+    8,  # tempo de frutificação
     60 / 10 / 60,  # tempo de colheita
     0.4,  # tempo de plantio
     tempo_de_venda_planta,  # tempo de venda
