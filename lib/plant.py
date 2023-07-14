@@ -4,10 +4,10 @@ import string
 class Plant:
     def __init__(
         self,
-        nome: string,
+        nome,
         produção_da_casa: float,
         valor: float,
-        estação_da_colheita: list[12],
+        estação_da_colheita: list[int],
         tempo_de_frutificação: int,
         tempo_de_colheita: float,
         tempo_de_plantio: float,

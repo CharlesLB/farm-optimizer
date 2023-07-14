@@ -14,7 +14,7 @@ from resources.plants._all import plants
 
 def print_quantidade_colher_plantar(model):
     for month in months:
-        print("\nmonth:", month)
+        print("\nmonth:", month + 1)
         for plant in plants:
             index: int = plants.index(plant)
 

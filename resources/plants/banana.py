@@ -1,8 +1,8 @@
 from lib.plant import Plant
 from resources.constants.constants import tempo_de_venda_planta
 
-bananas = Plant(
-    "bananas",
+banana = Plant(
+    "banana",
     30,
     1.5,
     [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
