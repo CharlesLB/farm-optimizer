@@ -4,6 +4,20 @@
 
 Este é um projeto para ajudar um trabalhador rural a organizar seu calendário de colheita anual de forma a obter o maior lucro possível com seus produtos. O trabalhador possui uma fazenda onde planta diferentes tipos de vegetais e frutas, além de criar alguns animais. Ele precisa levar em consideração as restrições de trabalho mensal e demanda de cada produto.
 
+## Sumário
+
+- [Limitações do problema](#limitações-do-problema)
+- [Índices](#índices)
+- [Variáveis](#variáveis)
+- [Variáveis Auxiliares](#variáveis-auxiliares)
+- [Dados](#dados)
+  - [Para plantas (i)](#para-plantas-i)
+  - [Para animais (k)](#para-animais-k)
+- [Função Objetivo](#função-objetivo)
+- [Restrições](#restrições)
+- [Instalação](#instalação)
+- [Uso](#uso)
+
 ### Limitações do problema
 
 - O trabalhador tem um limite de horas de trabalho mensal.
@@ -87,11 +101,6 @@ Este é um projeto para ajudar um trabalhador rural a organizar seu calendário 
   - ∀i ∀j | QCij <= QPi[j – TFRUi] \* PSi
 - Não exceder o limite máximo de vegetais:
   - ∀i | Σj (QCij) <= Mi
-
-## Sumário
-
-- [Instalação](#instalação)
-- [Uso](#uso)
 
 ## Instalação
 
