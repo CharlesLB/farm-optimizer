@@ -1,13 +1,13 @@
 from pyomo.environ import *
-from resources.data import plants
-from resources.animals._all import animals
-from utils.date import get_plant_month
-from utils.math import get_int_value
-from resources.constants.constants import (
+from resources.data import (
+    plants,
+    animals,
     daysInMonth,
     horas_de_trabalho_por_mes,
     monthsInYear,
 )
+from utils.date import get_plant_month
+from utils.math import get_int_value
 
 
 # General constraints

@@ -1,7 +1,5 @@
 from pyomo.environ import *
-from resources.data import plants
-from resources.data import animals
-from resources.constants.constants import daysInTheYear, monthsInYear
+from resources.data import plants, animals, daysInTheYear, monthsInYear
 
 months = list(range(12))
 

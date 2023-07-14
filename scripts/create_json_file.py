@@ -7,7 +7,7 @@ from pathlib import Path
 parent_directory = str(Path(__file__).resolve().parent.parent)
 sys.path.append(parent_directory)
 from resources.plants._all import plants
-from resources.animals._all import animals
+from resources.data import animals
 
 plants_array = []
 
@@ -46,7 +46,13 @@ for animal in animals:
     }
     animals_array.append(new_animal)
 
-data = {"plants": plants_array, "animals": animals_array}
+
+info_array = {
+    "horas_de_trabalho_por_mes": 6 * 22,
+    "horas_de_manutencao_por_mes": 40,
+}
+
+data = {"plants": plants_array, "animals": animals_array, "info": info_array}
 
 json_data = json.dumps(data, indent=4)
 

@@ -62,4 +62,14 @@ for animal in animals_array:
     )
     animals.append(new_animal)
 
+
+info_array = json_data["info"]
+
+horas_de_trabalho_por_mes = info_array["horas_de_trabalho_por_mes"]
+horas_de_manutencao_por_mes = info_array["horas_de_manutencao_por_mes"]
+daysInMonth = 30
+workdaysInMonth = 22
+monthsInYear = 12
+daysInTheYear = daysInMonth * monthsInYear
+
 print("Data loaded successfully")

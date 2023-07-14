@@ -10,7 +10,7 @@ from core.constraints import (
     plant_rule_max,
 )
 from core.writer import write_output
-from resources.constants.constants import (
+from resources.data import (
     monthsInYear,
 )
 from resources.data import plants

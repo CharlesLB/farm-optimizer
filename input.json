@@ -404,5 +404,9 @@
             "numero_de_femeas": 10,
             "numero_de_machos": 10
         }
-    ]
+    ],
+    "info": {
+        "horas_de_trabalho_por_mes": 132,
+        "horas_de_manutencao_por_mes": 40
+    }
 }

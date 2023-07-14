@@ -1,5 +1,5 @@
 from lib.plant import Plant
-from resources.constants.constants import tempo_de_venda_planta
+from resources.data import tempo_de_venda_planta
 
 ora_pro_nobis = Plant(
     "Ora pro nóbis",
