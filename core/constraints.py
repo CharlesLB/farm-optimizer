@@ -1,6 +1,6 @@
 from pyomo.environ import *
-from resources.plants._all import plants
-from resources.animals._all import animals
+from resources.data import plants
+from resources.data import animals
 from utils.month import getPlantMonth
 from utils.math import getIntValue
 from resources.constants.constants import (
@@ -21,7 +21,7 @@ def rule_trabalhar_mais_que_o_planejado_mes(model, month):
             sum(
                 getIntValue(
                     animal.tempo_de_cuidado * animal.numero_de_femeas * daysInMonth
-                    + (animal.numero_de_femeas * animal.tempo_de_produção * daysInMonth)
+                    + (animal.numero_de_femeas * animal.tempo_de_producao * daysInMonth)
                     / animal.remessa
                 )
                 * animal.tempo_de_venda
@@ -41,7 +41,7 @@ def rule_trabalhar_mais_que_o_planejado_mes(model, month):
                 + (
                     (
                         model.quantidade_colher[plants.index(plant), month]
-                        - (plant.produção_da_casa * plant.estação_da_colheita[month])
+                        - (plant.producao_da_casa * plant.estacao_da_colheita[month])
                     )
                     / plant.remessa
                     * plant.tempo_de_venda
@@ -55,10 +55,10 @@ def rule_trabalhar_mais_que_o_planejado_mes(model, month):
 # Plant constraints
 
 
-def plant_rule_produção(model, month, plant):
+def plant_rule_producao(model, month, plant):
     return (
         model.quantidade_colher[plants.index(plant), month]
-        >= plant.produção_da_casa * plant.estação_da_colheita[month]
+        >= plant.producao_da_casa * plant.estacao_da_colheita[month]
     )
 
 
@@ -66,9 +66,9 @@ def plant_rule_plantar_o_que_colho(model, month, plant):
     return (
         model.quantidade_colher[plants.index(plant), month]
         <= model.quantidade_plantar[
-            plants.index(plant), getPlantMonth(month, plant.tempo_de_frutificação)
+            plants.index(plant), getPlantMonth(month, plant.tempo_de_frutificacao)
         ]
-        * plant.produção_por_muda
+        * plant.producao_por_muda
     )
 
 

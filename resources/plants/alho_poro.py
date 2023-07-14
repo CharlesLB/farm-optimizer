@@ -6,7 +6,7 @@ alho_poró = Plant(
     1 * 5,  # producao da casa
     0,  # valor
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],  # estacao da colheita
-    5,  # tempo de frutificação
+    5,  # tempo de frutificacao
     60 / 5 / 60,  # tempo de colheita
     60 / 8 / 60,  # tempo de plantio
     tempo_de_venda_planta,  # tempo de venda

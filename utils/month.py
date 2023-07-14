@@ -1,6 +1,6 @@
-def getPlantMonth(month, tempo_de_frutificação):
+def getPlantMonth(month, tempo_de_frutificacao):
     positions = 11
-    result = month - tempo_de_frutificação
+    result = month - tempo_de_frutificacao
 
     if result < 0:
         while result < 0:

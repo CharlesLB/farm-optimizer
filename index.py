@@ -1,7 +1,10 @@
+# python -u index.py
+
+import sys
 from pyomo.environ import *
 from core.objective import obj_rule
 from core.constraints import (
-    plant_rule_produção,
+    plant_rule_producao,
     plant_rule_plantar_o_que_colho,
     rule_trabalhar_mais_que_o_planejado_mes,
     plant_rule_max,
@@ -9,7 +12,7 @@ from core.constraints import (
 from resources.constants.constants import (
     monthsInYear,
 )
-from resources.plants._all import plants
+from resources.data import plants
 
 
 def print_quantidade_colher_plantar(model):
@@ -31,6 +34,14 @@ def print_quantidade_colher_plantar(model):
                 )
 
 
+arguments = sys.argv
+
+if arguments.__len__() == 1:
+    print("No input file provided")
+    print("Usage: python -u index.py <input_file>")
+    exit()
+
+
 model = ConcreteModel()
 
 plantas = list(range(plants.__len__()))
@@ -47,7 +58,7 @@ for plant in plants:
     model.constraints.add(plant_rule_max(model, plant))
 
     for month in months:
-        model.constraints.add(plant_rule_produção(model, month, plant))
+        model.constraints.add(plant_rule_producao(model, month, plant))
         model.constraints.add(plant_rule_plantar_o_que_colho(model, month, plant))
 
 for month in months:
