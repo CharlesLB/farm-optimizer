@@ -46,7 +46,10 @@ for plant in plants:
 for month in months:
     model.constraints.add(rule_trabalhar_mais_que_o_planejado_mes(model, month))
 
-solver = SolverFactory("glpk")
+solver = SolverFactory("glpk", tee=True)
 results = solver.solve(model)
+
+print("obj=", value(model.obj))
+print(results)
 
 write_output(model)

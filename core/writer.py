@@ -139,6 +139,13 @@ def get_lucro_mensal_com_plantas(model, month):
     )
 
 
+def write_lucro_total(model):
+    data = ["Total anual", float_to_cash(value(model.obj))]
+
+    data_csv.append(data)
+    data_csv.append([])
+
+
 def write_lucro(model):
     data_csv.append(["Informações Gerais"])
 
@@ -168,6 +175,7 @@ def write_lucro(model):
 def write_output(model):
     filename = f"data_output_{time.time()}.csv"
 
+    write_lucro_total(model)
     write_lucro(model)
     write_quantidade_colher_plantar(model)
     write_lucro_mensal_com_animais()
