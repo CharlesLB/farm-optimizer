@@ -1,5 +1,8 @@
 # Farm Optimizer
 
+Este trabalho foi desenvolvido como parte da disciplina Pesquisa Operacional- UFJF, ministrada pelo professor Passini.
+
+
 ## Descrição
 
 Este é um projeto para ajudar um trabalhador rural a organizar seu calendário de colheita anual de forma a obter o maior lucro possível com seus produtos. O trabalhador possui uma fazenda onde planta diferentes tipos de vegetais e frutas, além de criar alguns animais. Ele precisa levar em consideração as restrições de trabalho mensal e demanda de cada produto.
